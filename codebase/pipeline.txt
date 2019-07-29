@@ -1,0 +1,52 @@
+VRTag Data Analysis Pipeline
+
+I. Preprocessing
+
+The raw data isn't in the precise format we need it in for analysis. In order to systematically put the data in the correct format, we need a standardized "preprocessing" strategy. If you look at the raw files, the columns are missing headers, and there is no "subject" identification column. Both of these are integral for clean data analysis and fitting to the syntax of pandas, seaborn, and pingouin (python).
+
+a) Manually: 
+
+	i) open up the subject's file and paste the following header in the first row:
+
+subject	trial	pic_id	act_x	act_y	est_x	est_y	correct	dist	rt	day	condition
+
+	ii) Then place the subject number in the "subject" column, proper day in the "day" column, and condition in the "condition" column
+
+	RECOMMDED ONLY FOR BY-SUB ANALYSIS OR IF TOTALLY UNSURE ABOUT THE CODING PIPELINE
+
+b) Scripted:
+
+Within-Subjects
+
+	i) Open terminal (mac) or powershell (windows) and navigate to your data file tree. There should be a separate "memory" folder in which there should be a "raw" folder with all the raw txt files, and a "preprcoessed" folder which will be the output of our data. The python script will be in the codebase" folder outside of the memory folder. Navigate to this folder by using standard bash language (cd to navigate)
+
+	ii) type: %run clean.py into the terminal and hit enter. This will generate a csv file in the preprocessed folder titled "VRTag_preprocessed.csv"
+
+	iii) Open this file and make sure everything is correct, in particular the subject number. Make sure that each subject's ID was correctly assigned to their data.
+
+	iv) In the "condition" column, enter the subjects condition (vr or video) for each subject. This may be added to the script as we go.
+
+Across-Subjects
+
+	i) VRTag_preprocessed_diff.csv should be generated from the above instructions.
+
+	ii) In the "condition" column, enter the subjects condition (vr or video) for each subject. This may be added to the script as we go.
+
+
+Visualization/Graphing:
+
+	a) Within-subject visualization:
+
+		i) Navigate to the "graphing.py" script in "codebase" and open the file. 
+
+		ii) I find it best to use ipython and run fragments of the code by copying and pasting parts from the graphing script. The script is currently split by "within-sub" and "across-sub" graphing. In general, swarm and box plots are best to use within-sub so you can see total data points. For across-sub, any grpahing will do, but viewing means is easier with pointplots.
+
+		iii) Object-oriented graphing is typically a better way to visual high-dimensional data (data with multiple factors). Data becomes higher in dimensionality as we get to across-sub visualization. 
+
+	b) Across-subject visualization:
+
+		i) Navigate to the "graphing.py" script in "codebase" and open the file. 
+
+		ii) I find it best to use ipython and run fragments of the code by copying and pasting parts from the graphing script. The script is currently split by "within-sub" and "across-sub" graphing. In general, swarm and box plots are best to use within-sub so you can see total data points. For across-sub, any grpahing will do, but viewing means is easier with pointplots.
+
+		iii) Object-oriented graphing is typically a better way to visual high-dimensional data (data with multiple factors). Data becomes higher in dimensionality as we get to across-sub visualization. 

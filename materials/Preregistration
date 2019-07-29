@@ -1,0 +1,34 @@
+Author(s)
+Mason McClay (University of Texas at Austin Dell Medical School) - mason.mcclay@austin.utexas.edu
+Joseph Dunsmoor (University of Texas at Austin Dell Medical School) - joseph.dunsmoor@austin.utexas.edu
+Carly Hatchell (University of Texas at Austin Dell Medical School) - carly.hatchell@austin.utexas.edu
+Alejandro Hipolito (University of Texas at Austin Dell Medical School) - alejandro.reyhipolito@utexas.edu
+Make sure all email addresses are correct, otherwise authors will not have access to this submission and it will never be approved.
+
+Submission
+1) Have any data been collected for this study already?
+No, no data have been collected for this study yet.
+
+2) What's the main question being asked or hypothesis being tested in this study?
+Question: Does a spatially engaging, immersive, and novel task enhance previously encoded episodic memory after a period of consolidation?
+Hypothesis: Exposure to a spatially engaging task in a novel and entertaining environment will serve to enhance previously encoded episodic (spatial) memory after a period of consolidation.
+
+3) Describe the key dependent variable(s) specifying how they will be measured.
+Participants will be tested on the locations of pictures on a 2-dimensional grid they learned at the beginning of the experiment the day of encoding as well as the next day. Their performance will be determined by a memory index, which will be calculated by subtracting the average distance between the actual and selected locations of the pictures on the second day by the average on the first day, and then by regressing out the error from the first day.
+
+4) How many and which conditions will participants be assigned to?
+4 conditions in a mixed-design. All subjects will be tested on their memory on day 1 and day 2 (factor of day). Participants will be randomly assigned to one of two conditions in which they will either play a spatially engaging and entertaining virtual reality game (Xing: the land beyond; if subjects are too nauseated they will play Moss), or they will watch a video of one of the experimenters playing the game (Xing) on a 2-dimensional screen (factor of novelty).
+
+5) Specify exactly which analyses you will conduct to examine the main question/hypothesis.
+We will run a t-test between the memory index for novelty or passive viewing conditions.
+
+6) Describe exactly how outliers will be defined and handled, and your precise rule(s) for excluding observations.
+We will exclude participants who report being frustrated or confused by the virtual reality task as well as outliers that perform 3 SD outside the mean.
+
+7) How many observations will be collected or what will determine sample size?
+No need to justify decision, but be precise about exactly how the number will be determined.
+We will stop data collection once 40 participants have completed both days of the experiment (20 in each condition).
+
+8) Anything else you would like to pre-register?
+(e.g., secondary analyses, variables collected for exploratory purposes, unusual analyses planned?)
+We will run a multiple linear regression predicting memory index with condition as well as individual differences on spatial strategies used in the game and the object location task, engagement levels in the game manipulation, and scores from several questionnaires (BAI, IUS, BDI, IPQ, TPQ).
