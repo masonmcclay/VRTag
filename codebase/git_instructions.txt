@@ -1,0 +1,34 @@
+Git Instructions:
+
+Copying VRTag repository:
+
+Navigate to where project should live:
+
+- git clone git@github.com:masonmcclay/VRTag.git
+
+
+Pushing and Pulling Updates:
+
+Navigate to project folder (e.g. Lab_Experiments/VRTag)
+
+Push:
+- git push origin master
+
+Pull:
+- git pull origin master
+
+
+Branching Github:
+
+DO NOT MESS WITH THE MASTER
+
+- to view your branches, typ git branch -a
+- this will show you which branches you have. You should only have the "master" branch at this point
+- to create. new branch (e.g. vr_alejandro_1), type "git checkout -b vr_alejandro_1"
+- to add the new data files to the branch, type "git add VRTag_Sub001_..." (the file name of the subject's data)
+- to be sure you will be merging the files you want to merge, type "git status" and check the "new file"
+- now, go back to master by typing "get checkout master"
+- and finally, merge the new data with the master by typing git merge [branch name] --no-ff
+- and push the merged master onto the repository! type "git push"
+
+
