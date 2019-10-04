@@ -7,7 +7,7 @@ import seaborn as sns
 import sys
 import pingouin as pg
 import numpy.polynomial.polynomial as poly
-from wesanderson import wes_palettes
+#from wesanderson import wes_palettes
 from matplotlib.patches import Patch
 
 

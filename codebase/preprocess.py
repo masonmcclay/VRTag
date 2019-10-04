@@ -13,7 +13,7 @@ import csv
 ## A preprocessing/data cleaning script for VRTag
 
 
-def dataOrg(file, number, out, source):
+def dataOrg(file, number, out, source, meta):
 
 	## Assigning values to necessary variables and dataframes
 
@@ -109,13 +109,22 @@ def dataOrg(file, number, out, source):
 def main():
 
 
+	## read in metadata
+
+	meta_path = "C:/Users/mason/Desktop/VRTag/meta_data"
+
+	os.chdir(meta_path)
+
+	meta_df = pd.read_csv("meta_data.csv", sep= "\t", header= None)
+
+
 	## Set to the working directory.
 
-	path = "/Users/mgm3684/Desktop/lab_experiments/VRTag/memory/raw"
+	path = "C:/Users/mason/Desktop/VRTag/memory/raw"
 
 	## Set output directory.
 
-	output = "/Users/mgm3684/Desktop/lab_experiments/VRTag/memory/preprocessed"
+	output = "C:/Users/mason/Desktop/VRTag/memory/preprocessed"
 
 	## Assign sub cocatenation
 
@@ -134,7 +143,7 @@ def main():
 		if files.endswith('phase3.txt'):
 			root = str(files)
 			print (root)
-			clean = dataOrg(root, sub, output, path)
+			clean = dataOrg(root, sub, output, path, meta_df)
 
 	#sub+=1
 
