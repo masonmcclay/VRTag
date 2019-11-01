@@ -13,15 +13,27 @@ import csv
 ## A preprocessing/data cleaning script for VRTag
 
 
-def dataOrg(file, number, out, source, meta):
+
+def dataOrg(file, out, source, number):
 
 	## Assigning values to necessary variables and dataframes
 
-	print(number)
 
 	df = pd.read_csv(file, sep= "\t", header= None)
 
-	sub_id_col = [number for i in range(48)]
+
+	#subject = file[:9]
+	#print(subject)
+	#number.append(subject)
+	#print(number)
+
+	subject = file[:9]
+
+	print(subject)
+
+	sub_id_col = np.repeat(subject, 48)
+
+	print(sub_id_col)
 
 	trial_col = [(i+1) for i in range(48)]
 
@@ -34,8 +46,11 @@ def dataOrg(file, number, out, source, meta):
 	df.insert(1, "trial", trial_col, True)
 	df.insert(11, "day", day, True)
 	df.insert(12, "condition", True)
+	df.insert(13, "act_quad", True)
+	df.insert(14, "est_quad", True)
+	df.insert(15, "diff_quad", True)
 
-	df.columns = ["subject","trial","null","pic_id","act_x","act_y","est_x","est_y","correct","dist","rt","day", "condition"]
+	df.columns = ["subject","trial","null","pic_id","act_x","act_y","est_x","est_y","correct","dist","rt","day", "condition", "act_quad","est_quad","diff_quad"]
 
 	df_days = df.copy()
 
@@ -64,11 +79,81 @@ def dataOrg(file, number, out, source, meta):
 	day1rt_mean = np.mean(day1rt)
 	day2rt_mean = np.mean(day2rt)
 
-	dist_mean = np.mean(day1) - np.mean(day2)
+	dist_mean = np.mean(day2) - np.mean(day1)
 
-	rt_mean = np.mean(day1rt) - np.mean(day2rt)
+	rt_mean = np.mean(day2rt) - np.mean(day1rt)
 
-	df_mean = pd.DataFrame({'subject':[number],
+	est_quad = []
+	act_quad = []
+
+	for i in range(47):
+
+		if (1500 >= df["act_x"][i]) & (df["act_x"][i] >= 750):
+
+			if (750 >= df["act_y"][i]) & (df["act_y"][i]  >= 0):
+				act_quad.append(1)
+
+			if (1500 >= df["act_y"][i]) & (df["act_y"][i]  >= 750):
+				act_quad.append(4)
+
+
+		if (750 >= df["act_x"][i]) & (df["act_x"][i] >= 0):
+
+			if (750 >= df["act_y"][i]) & (df["act_y"][i]  >= 0):
+				act_quad.append(3)
+
+			if (1500 >= df["act_y"][i]) & (df["act_y"][i]  >= 750):
+				act_quad.append(2)
+
+
+		if (1500 >= df["act_x"][i]) & (df["act_x"][i] >= 750):
+
+			if (750 >= df["est_y"][i]) & (df["est_y"][i]>= 0):
+				est_quad.append(1)
+
+			if (1500 >= df["est_y"][i]) & (df["est_y"][i]>= 750):
+				est_quad.append(4)
+
+
+		if (750 >= df["act_x"][i]) & (df["act_x"][i] >= 0):
+
+			if (750 >= df["est_y"][i]) & (df["est_y"][i] >= 0):
+				est_quad.append(3)
+
+			if (1500 >= df["est_y"][i]) & (df["est_y"][i] >= 750):
+				est_quad.append(2)
+
+
+	if len(act_quad) < 48:
+		act_quad.append("NaN")
+
+	if len(est_quad) < 48:
+		est_quad.append("NaN")
+
+	print(act_quad)
+	print(est_quad)
+
+	aq = pd.Series(act_quad)
+	eq = pd.Series(est_quad)
+
+	df_days["act_quad"] = aq
+	df_days["est_quad"] = eq
+
+	
+	quad_diff = []
+
+	for i in range(47):
+		quad_differ = act_quad[i] - est_quad[i]
+		quad_diff.append(quad_differ)
+
+	if len(quad_diff) < 48:
+		quad_diff.append("NaN")
+		
+
+	qd = pd.Series(quad_diff)
+	df_days["quad_diff"] = qd
+
+	df_mean = pd.DataFrame({'subject':[subject],
 							'day 1 distance':[day1_mean],
 							'day 2 distance':[day2_mean],
 							'day 1 rt':[day1rt_mean],
@@ -83,7 +168,7 @@ def dataOrg(file, number, out, source, meta):
 
 	## Write new dataframe by days to CSV
 
-	if number == 1:
+	if len(sub_id_col) == 1:
 
 
 		df_days.to_csv('VRTag_days.csv')
@@ -121,7 +206,9 @@ def main():
 
 	## Set to the working directory.
 
-	path = "C:/Users/mason/Desktop/VRTag/memory/raw"
+
+	path = "/Users/mgm3684/Desktop/lab_experiments/VRTag/memory/raw/phase3"
+
 
 	## Set output directory.
 
@@ -130,22 +217,26 @@ def main():
 
 	## Assign sub cocatenation
 
-	sub = 0
+	#subList = []
 
 	os.chdir(path)
+
+	sub = 0
+
 
 	for files in os.listdir():
 
 		os.chdir(path)
 
-		sub+=1
-
-		print(sub)
+		
 
 		if files.endswith('phase3.txt'):
 			root = str(files)
 			print (root)
-			clean = dataOrg(root, sub, output, path, meta_df)
+			
+			#print (root)
+			clean = dataOrg(root, output, path, sub)
+			sub+=1
 
 	#sub+=1
 

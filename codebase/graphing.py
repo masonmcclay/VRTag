@@ -25,17 +25,26 @@ fig, ax = plt.subplots()
 sns.set_style("ticks")
 sns.set_context("talk")
 
-df = pd.read_csv("VRTag_difference.csv")
+df = pd.read_csv("VRTag_days.csv")
+
+#df['daycond'] = df.day + df.cond.astype(str)
 
 ## Pointplot for simple, easy mean/sem visualization
 
-sns.pointplot(x="condition",y="dist difference",ax=ax,palette = p1,data=df, dodge= True,ci=68)
-sns.swarmplot(x="condition",y="dist difference",ax=ax,data=df, dodge= True, color = ".2")
+
+
+df = df.groupby(['subject','day','condition']).mean().reset_index()
+
+#sns.pointplot(x="day",y="dist", hue = "condition", ax=ax,palette = p1,data=df, dodge= True,ci=68)
+sns.swarmplot(x="day",y="dist", hue = "condition", dodge= True, ax=ax,data=df, hue_order = ["video","vr"])
 
 
 #ax.legend_.remove()
 sns.despine(ax=ax)
+<<<<<<< HEAD
 ax.set(xlabel="Condition",ylabel="Day 1 minus Day 2 distance (pixels)")
+
+ax.set(xlabel="Condition",ylabel="Distance from Correct (pixels)")
 
 ## box and swarm for specific data-point visualization
 
@@ -59,12 +68,14 @@ fig, ax = plt.subplots(1,2, sharey=True)
 
 p2 = sns.color_palette("RdBu", n_colors=2)
 
+df['daycond'] = df.day + df.cond.astype(str)
+
 #order = [2,3,1,0]
 #p2 = [p2[i] for i in order]
 
 for i, cons in enumerate(con.confidence.unique()):
 
-	sns.boxplot(x="proc",y="score",hue="dayemo", col="confidence",order = ["view", "suppress"],ax=ax[i], palette = p2, data=con.query("confidence == @cons"), dodge= True, ci= 68)
+	sns.boxplot(x="proc",y="score",hue="daycond", col="confidence",order = ["view", "suppress"],ax=ax[i], palette = p2, data=con.query("confidence == @cons"), dodge= True, ci= 68)
 	
 	ax[i].legend_.remove()
 	sns.despine(ax=ax[i])
