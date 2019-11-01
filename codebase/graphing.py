@@ -7,7 +7,6 @@ import seaborn as sns
 import sys
 import pingouin as pg
 import numpy.polynomial.polynomial as poly
-#from wesanderson import wes_palettes
 from matplotlib.patches import Patch
 
 
@@ -26,24 +25,31 @@ fig, ax = plt.subplots()
 sns.set_style("ticks")
 sns.set_context("talk")
 
+df = pd.read_csv("VRTag_difference.csv")
 
 ## Pointplot for simple, easy mean/sem visualization
 
-sns.pointplot(x="day",y="dist",ax=ax,palette = p1,data=df, dodge= True,ci=68)
-ax.legend_.remove()
+sns.pointplot(x="condition",y="dist difference",ax=ax,palette = p1,data=df, dodge= True,ci=68)
+sns.swarmplot(x="condition",y="dist difference",ax=ax,data=df, dodge= True, color = ".2")
+
+
+#ax.legend_.remove()
 sns.despine(ax=ax)
-ax.set(xlabel="Day",ylabel="Distance")
+ax.set(xlabel="Condition",ylabel="Day 1 minus Day 2 distance (pixels)")
 
 ## box and swarm for specific data-point visualization
 
-sns.boxplot(x="day",y="dist",ax=ax,palette = p1,data=df, dodge= True)
-sns.swarmplot(x="day",y="dist",ax=ax,color = "black",data=df, dodge= True)
+#sns.boxplot(x="day",y="dist",ax=ax,palette = p1,data=df, dodge= True)
+#sns.swarmplot(x="day",y="dist",ax=ax,color = "black",data=df, dodge= True)
 
 
-legend_elements = [Patch(facecolor=p1[0],edgecolor="black", label='Day 1'),
-Patch(facecolor=p1[1],edgecolor='black', label='Day 2')]
+legend_elements = [Patch(facecolor=p1[0],edgecolor="black", label='VR'),
+Patch(facecolor=p1[1],edgecolor='black', label='Control')]
 
 plt.legend(handles=legend_elements,title='Day', loc = "best")
+
+
+
 
 
 ## 2) Object-oriented graphing. Good for across-subjects, by-condition graphing

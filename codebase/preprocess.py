@@ -49,6 +49,7 @@ def dataOrg(file, number, out, source, meta):
 
 	rt = df['rt'].tolist()
 
+
 	day2 = [d for d in dist if day[dist.index(d)] == int(2)]
 	day1 = [d for d in dist if day[dist.index(d)] == int(1)]
 
@@ -111,11 +112,11 @@ def main():
 
 	## read in metadata
 
-	meta_path = "C:/Users/mason/Desktop/VRTag/meta_data"
+	##meta_path = "C:/Users/mason/Desktop/VRTag/meta_data"
 
-	os.chdir(meta_path)
+	##os.chdir(meta_path)
 
-	meta_df = pd.read_csv("meta_data.csv", sep= "\t", header= None)
+	##meta_df = pd.read_csv("meta_data.csv", sep= "\t", header= None)
 
 
 	## Set to the working directory.
@@ -125,6 +126,7 @@ def main():
 	## Set output directory.
 
 	output = "C:/Users/mason/Desktop/VRTag/memory/preprocessed"
+
 
 	## Assign sub cocatenation
 
